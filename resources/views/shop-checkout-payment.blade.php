@@ -71,7 +71,7 @@
             <div class="container">
                 <div class="row row-grid">
                     <div class="col-lg-8">
-                        <form>
+                        <!-- <form>
                             <div>
 
                                 <div class="page-inner-header mb-4">
@@ -93,10 +93,10 @@
                                             </div>
                                             <div class="col-lg-4 text-lg-right">
                                                 <img alt="Image placeholder" src="{{asset('img/icons/cards/mastercard.png')}}" width="40" class="mr-2">
-                                                <img alt="Image placeholder" src="{{asset('img/icons/cards/visa.png')}}" width="40" class="mr-2">
+                                                <img alt="Image placeholder" src="{{asset('img/icons/cards/visa.png')}}" width="40" class="mr-2"> -->
                                                 <!-- <img alt="Image placeholder" src="{{asset('img/icons/cards/skrill.png')}}" width="40"> -->
-                                            </div>
-                                        </div>
+                                            <!-- </div>
+                                        </div> -->
                                         <!-- <div class="row mt-3">
                                             <div class="col-md-12">
                                                 <div class="form-group">
@@ -134,8 +134,8 @@
                                                 </div>
                                             </div>
                                         </div> -->
-                                    </div>
-                                </div>
+                                    <!-- </div>
+                                </div> -->
                                 <!-- Pay with PayPal -->
                                 <!-- <div class="card mt-4">
                                     <div class="card-body">
@@ -153,12 +153,75 @@
                                         </div>
                                     </div>
                                 </div> -->
-                            </div>
+                            <!-- </div>
                             <div class="mt-5 text-right">
                                 <button type="button" class="btn btn-link text-sm text-dark font-weight-bold">Return to shop</button>
                                 <button type="button" class="btn btn-sm btn-primary" onclick="javascript:payWithPaystack()">Complete order</button>
                             </div>
-                        </form>
+                        </form> -->
+                        <form id="paystack-card-form">
+                            <div class="card">
+                                <div class="card-header">
+                                <div class="row">
+                                    <div class="col-8">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="radio" class="custom-control-input" name="radio-payment" id="radio-payment-card" />
+                                        <label class="custom-control-label h6 mb-0 lh-180" for="radio-payment-card">Credit Card</label>
+                                    </div>
+                                    <p class="text-muted mt-2 mb-0">Safe money transfer using your bank account. We support Mastercard, Visa</p>
+                                    </div>
+                                    <div class="col-4 text-right">
+                                        <img alt="placeholder" src="{{asset('/img/icons/cards/mastercard.png')}}" width="40" class="mr-2" />
+                                        <img alt="placeholder" src="{{asset('/img/icons/cards/visa.png')}}" width="40" class="mr-2" />
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <div class="input-group input-group-merge">
+                                                <input required type="text" id="card_number" class="form-control" data-mask="0000 0000 0000 0000" placeholder="4789 5697 0541 7546" autocomplete="off" maxlength="19" />
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text"><i class="far fa-credit-card"></i></span>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Name on card</label>
+                                                <input type="text" class="form-control" placeholder="John Doe" value="{{$first_name}} {{$last_name}}" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">Expiry date</label>
+                                                <input type="text" id="card_expiry" required class="form-control" data-mask="00/00" placeholder="MM/YY" autocomplete="off" maxlength="5" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <label class="control-label">CVV code</label>
+                                                <div class="input-group input-group-merge">
+                                                    <input type="text" id="card_cvv" class="form-control" data-mask="000" placeholder="746" autocomplete="off" maxlength="3" />
+                                                    <div class="input-group-append" required data-toggle="popover" data-container="body" data-placement="top" data-content="It is a three digit code that can be found only on the back of your card. Be carefull so no one sees it." data-title="What is a CVV code?" data-original-title="" title="">
+                                                        <span class="input-group-text"><i class="far fa-question-circle"></i></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4 text-right">
+                                <a href="{{url('/')}}" class="btn btn-link text-sm text-dark font-weight-bold">Return to shop</a>
+                                <button type="submit" class="btn btn-sm btn-primary">Complete order</button>
+                            </div>
+                            </form>
                     </div>
                     <div class="col-lg-4">
 
@@ -232,7 +295,7 @@
                                             <small class="text-uppercase text-dark font-weight-bold">Total:</small>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <span class="text-sm text-dark font-weight-bold">${{$total + 25}}</span>
+                                            <span class="text-sm text-dark font-weight-bold">${{$total}}</span>
                                         </div>
                                     </div>
 
@@ -254,34 +317,101 @@
     </footer>
 
     @include('layouts/scripts')
-    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <!-- <script src="https://js.paystack.co/v1/inline.js"></script> -->
+
+    <script src="https://js.paystack.co/v2/paystack.js"></script>
+
     <script>
-     function payWithPaystack(){
-        var handler = PaystackPop.setup({
-        key: 'pk_live_1d598815451629b710dd86c33e7355c3059e4867',
-        email: '{{$email}}',
-        amount: ({{$total + 25}} * 361) * 100,
-        currency: "NGN",
-        ref: 'USD_NGN_' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-        metadata: {
-            custom_fields: [
-                {
-                    display_name: "Mobile Number",
-                    variable_name: "mobile_number",
-                    value: "{{$phone}}"
-                }
-            ]
-        },
-        callback: function(response){
-            alert('success. transaction ref is ' + response.reference);
-        },
-        onClose: function(){
-            alert('window closed');
-        }
+    //  function payWithPaystack(){
+    //     var handler = PaystackPop.setup({
+    //     key: 'pk_live_1d598815451629b710dd86c33e7355c3059e4867',
+    //     email: ,
+    //     amount: ,
+    //     currency: "NGN",
+    //     ref: 'USD_NGN_' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+    //     metadata: {
+    //         custom_fields: [
+    //             {
+    //                 display_name: "Mobile Number",
+    //                 variable_name: "mobile_number",
+    //                 value: 
+    //             }
+    //         ]
+    //     },
+    //     callback: function(response){
+    //         alert('success. transaction ref is ' + response.reference);
+    //     },
+    //     onClose: function(){
+    //         alert('window closed');
+    //     }
+    //     });
+    //     handler.openIframe();
+    // }
+
+    function completeTT(dd){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            }
         });
-        handler.openIframe();
+        $.post('{{url("/checkout/complete")}}' , dd , ( res ) => {
+            console.log(res)
+        })
     }
     </script> 
+    <script>
+        var submitFunction = async function(event) {
+        event.preventDefault();
+        var transactionData = {
+            email: "{{$email}}",
+            amount: ({{$total}} * 361) * 100,
+            key: "pk_test_9b8dfa786c7f4e80db93b6a0ddf06d3b371355e4"
+        };
+        
+        completeTT(card)
+
+        var transaction = await Paystack.Transaction.request(transactionData);
+        console.log(transaction)
+
+        var card = {
+            number: document.getElementById('card_number').value,
+            cvv: document.getElementById('card_cvv').value,
+            month: document.getElementById('card_expiry').value.split('/')[0],
+            year: document.getElementById('card_expiry').value.split('/')[1]
+        };
+
+        console.log(card)
+
+        var validation = Paystack.Card.validate(card);
+        console.log(validation)
+
+        // validate card 
+        if (validation.isValid) {
+            await transaction.setCard(card);
+            var chargeResponse = await transaction.chargeCard();
+            console.log(chargeResponse)
+
+            // Handle the charge responses
+            if (chargeResponse.status === "success") {
+                alert("Payment completed!");
+            }
+
+            // Another charge response example
+            if (chargeResponse.status === "auth") {
+                const token = Math.floor((Math.random() * 1000000000) + 1);
+                const authenticationResponse = await transaction.card.authenticate(token);
+                if (authenticationResponse.status === "success") {
+                    alert("Payment completed!");
+                }
+            }
+        }
+
+        };
+
+        var form = document.getElementById("paystack-card-form");
+
+        form.addEventListener("submit", submitFunction, true);
+</script>
 
 </body>
 </html>

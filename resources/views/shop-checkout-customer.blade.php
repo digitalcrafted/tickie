@@ -74,13 +74,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">First name</label>
-                                        <input class="form-control" required type="text" placeholder="Enter your first name">
+                                        <input class="form-control" required type="text" name="first_name" placeholder="Enter your first name" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Last name</label>
-                                        <input class="form-control" required type="text" placeholder="Also your last name">
+                                        <input class="form-control" required type="text" name="last_name" placeholder="Enter your last name" />
                                     </div>
                                 </div>
                             </div>
@@ -88,7 +88,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label class="form-control-label">Address</label>
-                                        <input class="form-control" required type="text" placeholder="Address, Number">
+                                        <input class="form-control" required type="text" name="address" placeholder="Address, Number" />
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Country</label>
-                                        <select required class="form-control" data-toggle="select" title="Country">
+                                        <select required class="form-control" name="country" data-toggle="select" title="Country">
                                             <option >Select your country</option>
                                             <option selected value="7">United States</option>
                                         </select>
@@ -113,7 +113,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">City</label>
-                                        <select required class="form-control" data-toggle="select" title="City">
+                                        <select required class="form-control" name="city" data-toggle="select" title="City">
                                             <option selected>Select your city</option>
                                             <option value="AL">Alabama</option>
                                             <option value="AK">Alaska</option>
@@ -174,7 +174,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="form-control-label">Postal code</label>
-                                        <input class="form-control" required type="text" placeholder="Address, Number">
+                                        <input class="form-control" required type="text" name="zip" placeholder="Zip code" />
                                     </div>
                                 </div>
                                 <div class="col-md-6">

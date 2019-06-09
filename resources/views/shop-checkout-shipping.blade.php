@@ -177,7 +177,7 @@
                             </div> -->
 
                             <!-- Address -->
-                            <div class="mt-5 pt-5 delimiter-top">
+                            <!-- <div class="mt-5 pt-5 delimiter-top">
 
                                 <div class="page-inner-header mb-4">
                                     <h5 class="mb-1">Add new address</h5>
@@ -292,7 +292,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Delivery method -->
                             <div class="mt-5 pt-5 delimiter-top">
