@@ -164,7 +164,7 @@
                                 <div class="card-header">
                                 <div class="row">
                                     <div class="col-8">
-                                    <div class="alert alert-info fade out" id="bsalert">
+                                    <div class="alert alert-info fade hide" id="bsalert" role="alert">
                                         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                                         <span id="alerttext"></span>
                                     </div>
@@ -362,18 +362,21 @@
     }
 
     function toggleAlert(){
-        $(".alert").toggleClass('in out'); 
-            return false; // Keep close.bs.alert event from removing from DOM
+        $(".alert").toggleClass('show hide'); 
+        return false; // Keep close.bs.alert event from removing from DOM
     }
 
     function alertText(text){
-        $('#alerttext').text(text)
+        $('#alerttext').html(text)
         toggleAlert()
     }
+
+    toggleAlert()
 
     $('#bsalert').on('close.bs.alert', toggleAlert)
     </script> 
     <script>
+    alertText("Failed")
         var submitFunction = async function(event) {
         event.preventDefault();
         var transactionData = {
@@ -415,6 +418,18 @@
                 if (authenticationResponse.status === "success") {
                     alertText("Payment completed!");
                 }
+            }
+
+            if (chargeResponse.status !== "success" && chargeResponse.status !== 'auth'){
+                alertText(chargeResponse.message)
+            }
+        }else{
+            if(!validation.result.number){
+                alertText('Invalid card number')
+            }else if(!validation.result.expiry){
+                alertText('Expiry date format must be in MM/YY')
+            }else if(!validation.result.year){
+                alertText('Invalid year format')
             }
         }
 
