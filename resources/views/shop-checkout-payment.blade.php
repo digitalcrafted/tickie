@@ -365,9 +365,9 @@
         $(".alert").toggleClass('in out'); 
             return false; // Keep close.bs.alert event from removing from DOM
     }
-    
+
     function alertText(text){
-        #('#alerttext').text(text)
+        $('#alerttext').text(text)
         toggleAlert()
     }
 
