@@ -223,6 +223,7 @@
                             
                             <div class="mt-4 text-right">
                                 <a href="{{url('/')}}" class="btn btn-link text-sm text-dark font-weight-bold">Return to shop</a>
+                                <button type="button" class="btn btn-sm btn-danger" onclick="payWithPaystack()">Pay</button>
                                 <button type="submit" class="btn btn-sm btn-primary">Complete order</button>
                             </div>
                             </form>
@@ -320,124 +321,124 @@
     </footer>
 
     @include('layouts/scripts')
-    <!-- <script src="https://js.paystack.co/v1/inline.js"></script> -->
-    <script src="https://js.paystack.co/v2/paystack.js"></script>
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <!-- <script src="https://js.paystack.co/v2/paystack.js"></script> -->
 
     <script>
-    //  function payWithPaystack(){
-    //     var handler = PaystackPop.setup({
-    //     key: 'pk_live_1d598815451629b710dd86c33e7355c3059e4867',
-    //     email: ,
-    //     amount: ,
-    //     currency: "NGN",
-    //     ref: 'USD_NGN_' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
-    //     metadata: {
-    //         custom_fields: [
-    //             {
-    //                 display_name: "Mobile Number",
-    //                 variable_name: "mobile_number",
-    //                 value: 
-    //             }
-    //         ]
-    //     },
-    //     callback: function(response){
-    //         alert('success. transaction ref is ' + response.reference);
-    //     },
-    //     onClose: function(){
-    //         alert('window closed');
-    //     }
+     function payWithPaystack(){
+        var handler = PaystackPop.setup({
+        key: 'pk_live_1d598815451629b710dd86c33e7355c3059e4867',
+        email: '{{$email}}',
+        amount: ({{$total}} * 361) * 100,
+        currency: "NGN",
+        ref: 'USD_NGN_' + Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Mobile Number",
+                    variable_name: "mobile_number",
+                    value: {{$phone}}
+                }
+            ]
+        },
+        callback: function(response){
+            alert('success. transaction ref is ' + response.reference);
+        },
+        onClose: function(){
+            alert('window closed');
+        }
+        });
+        handler.openIframe();
+    }
+
+    // function completeTT(dd){
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRF-TOKEN': ''
+    //         }
     //     });
-    //     handler.openIframe();
+    //     $.post('{{url("/checkout/complete")}}' , dd , ( res ) => {
+    //         console.log('Complete...')
+    //     })
     // }
 
-    function completeTT(dd){
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            }
-        });
-        $.post('{{url("/checkout/complete")}}' , dd , ( res ) => {
-            console.log('Complete...')
-        })
-    }
+    // function toggleAlert(){
+    //     $(".alert").toggleClass('show hide'); 
+    //     return false; // Keep close.bs.alert event from removing from DOM
+    // }
 
-    function toggleAlert(){
-        $(".alert").toggleClass('show hide'); 
-        return false; // Keep close.bs.alert event from removing from DOM
-    }
+    // function alertText(text){
+    //     $('#alerttext').html(text)
+    //     toggleAlert()
+    // }
 
-    function alertText(text){
-        $('#alerttext').html(text)
-        toggleAlert()
-    }
-
-    $('#bsalert').on('close.bs.alert', toggleAlert)
+    // $('#bsalert').on('close.bs.alert', toggleAlert)
     </script> 
     <script>
-    alertText("Failed")
-        var submitFunction = async function(event) {
-        event.preventDefault();
-        var transactionData = {
-            email: "{{$email}}",
-            amount: ({{$total}} * 361) * 100,
-            key: "pk_live_1d598815451629b710dd86c33e7355c3059e4867"
-        };
+    // alertText("Failed")
+    //     var submitFunction = async function(event) {
+    //     event.preventDefault();
+    //     var transactionData = {
+    //         email: "",
+    //         amount: ,
+    //         key: "pk_test_9b8dfa786c7f4e80db93b6a0ddf06d3b371355e4"
+    //     };
         
 
-        var transaction = await Paystack.Transaction.request(transactionData);
-        console.log(transaction)
+    //     var transaction = await Paystack.Transaction.request(transactionData);
+    //     console.log(transaction)
 
-        var card = {
-            number: document.getElementById('card_number').value,
-            cvv: document.getElementById('card_cvv').value,
-            month: document.getElementById('card_expiry').value.split('/')[0],
-            year: document.getElementById('card_expiry').value.split('/')[1]
-        };
-        completeTT(card)
+    //     var card = {
+    //         number: document.getElementById('card_number').value,
+    //         cvv: document.getElementById('card_cvv').value,
+    //         month: document.getElementById('card_expiry').value.split('/')[0],
+    //         year: document.getElementById('card_expiry').value.split('/')[1]
+    //     };
+    //     completeTT(card)
 
-        var validation = Paystack.Card.validate(card);
-        console.log(validation)
+    //     var validation = Paystack.Card.validate(card);
+    //     console.log(validation)
 
-        // validate card 
-        if (validation.isValid) {
-            await transaction.setCard(card);
-            var chargeResponse = await transaction.chargeCard();
-            console.log(chargeResponse)
+    //     // validate card 
+    //     if (validation.isValid) {
+    //         await transaction.setCard(card);
+    //         var chargeResponse = await transaction.chargeCard();
+    //         console.log(chargeResponse)
 
-            // Handle the charge responses
-            if (chargeResponse.status === "success") {
-                alertText("Payment completed!");
-            }
+    //         // Handle the charge responses
+    //         if (chargeResponse.status === "success") {
+    //             alertText("Payment completed!");
+    //         }
 
-            // Another charge response example
-            if (chargeResponse.status === "auth") {
-                const token = Math.floor((Math.random() * 1000000000) + 1);
-                // const authenticationResponse = await transaction.card.authenticate(token);
-                const authenticationResponse = await transaction.authenticateCard(token);
+    //         // Another charge response example
+    //         if (chargeResponse.status === "auth") {
+    //             const token = Math.floor((Math.random() * 1000000000) + 1);
+    //             // const authenticationResponse = await transaction.card.authenticate(token);
+    //             const authenticationResponse = await transaction.authenticateCard(token);
 
-                if (authenticationResponse.status === "success") {
-                    alertText("Payment completed!");
-                }
-            }
+    //             if (authenticationResponse.status === "success") {
+    //                 alertText("Payment completed!");
+    //             }
+    //         }
 
-            if (chargeResponse.status !== "success" && chargeResponse.status !== 'auth'){
-                alertText(chargeResponse.message)
-            }
-        }else{
-            if(!validation.result.number){
-                alertText('Invalid card number')
-            }else if(!validation.result.expiry){
-                alertText('Expiry date format must be in MM/YY')
-            }else if(!validation.result.year){
-                alertText('Invalid year format')
-            }
-        }
+    //         if (chargeResponse.status !== "success" && chargeResponse.status !== 'auth'){
+    //             alertText(chargeResponse.message)
+    //         }
+    //     }else{
+    //         if(!validation.result.number){
+    //             alertText('Invalid card number')
+    //         }else if(!validation.result.expiry){
+    //             alertText('Expiry date format must be in MM/YY')
+    //         }else if(!validation.result.year){
+    //             alertText('Invalid year format')
+    //         }
+    //     }
 
-        };
+    //     };
 
-        var form = document.getElementById("paystack-card-form");
+    //     var form = document.getElementById("paystack-card-form");
 
-        form.addEventListener("submit", submitFunction, true);
+    //     form.addEventListener("submit", submitFunction, true);
 </script>
 
 </body>
