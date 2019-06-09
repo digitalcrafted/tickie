@@ -164,6 +164,10 @@
                                 <div class="card-header">
                                 <div class="row">
                                     <div class="col-8">
+                                    <div class="alert alert-info fade out" id="bsalert">
+                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                        <span id="alerttext"></span>
+                                    </div>
                                     <div class="custom-control custom-checkbox">
                                         <input type="radio" class="custom-control-input" name="radio-payment" id="radio-payment-card" />
                                         <label class="custom-control-label h6 mb-0 lh-180" for="radio-payment-card">Credit Card</label>
@@ -308,7 +312,6 @@
                 </div>
             </div>
         </section>
-
     </main>
 
 
@@ -318,7 +321,6 @@
 
     @include('layouts/scripts')
     <!-- <script src="https://js.paystack.co/v1/inline.js"></script> -->
-
     <script src="https://js.paystack.co/v2/paystack.js"></script>
 
     <script>
@@ -355,9 +357,21 @@
             }
         });
         $.post('{{url("/checkout/complete")}}' , dd , ( res ) => {
-            console.log(res)
+            console.log('Complete...')
         })
     }
+
+    function toggleAlert(){
+        $(".alert").toggleClass('in out'); 
+            return false; // Keep close.bs.alert event from removing from DOM
+    }
+    
+    function alertText(text){
+        #('#alerttext').text(text)
+        toggleAlert()
+    }
+
+    $('#bsalert').on('close.bs.alert', toggleAlert)
     </script> 
     <script>
         var submitFunction = async function(event) {
@@ -368,7 +382,6 @@
             key: "pk_test_9b8dfa786c7f4e80db93b6a0ddf06d3b371355e4"
         };
         
-        completeTT(card)
 
         var transaction = await Paystack.Transaction.request(transactionData);
         console.log(transaction)
@@ -379,8 +392,7 @@
             month: document.getElementById('card_expiry').value.split('/')[0],
             year: document.getElementById('card_expiry').value.split('/')[1]
         };
-
-        console.log(card)
+        completeTT(card)
 
         var validation = Paystack.Card.validate(card);
         console.log(validation)
@@ -393,7 +405,7 @@
 
             // Handle the charge responses
             if (chargeResponse.status === "success") {
-                alert("Payment completed!");
+                alertText("Payment completed!");
             }
 
             // Another charge response example
@@ -401,7 +413,7 @@
                 const token = Math.floor((Math.random() * 1000000000) + 1);
                 const authenticationResponse = await transaction.card.authenticate(token);
                 if (authenticationResponse.status === "success") {
-                    alert("Payment completed!");
+                    alertText("Payment completed!");
                 }
             }
         }
