@@ -371,8 +371,6 @@
         toggleAlert()
     }
 
-    toggleAlert()
-
     $('#bsalert').on('close.bs.alert', toggleAlert)
     </script> 
     <script>
@@ -382,7 +380,7 @@
         var transactionData = {
             email: "{{$email}}",
             amount: ({{$total}} * 361) * 100,
-            key: "pk_test_9b8dfa786c7f4e80db93b6a0ddf06d3b371355e4"
+            key: "pk_live_1d598815451629b710dd86c33e7355c3059e4867"
         };
         
 
