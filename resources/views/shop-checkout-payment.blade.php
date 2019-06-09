@@ -412,7 +412,9 @@
             // Another charge response example
             if (chargeResponse.status === "auth") {
                 const token = Math.floor((Math.random() * 1000000000) + 1);
-                const authenticationResponse = await transaction.card.authenticate(token);
+                // const authenticationResponse = await transaction.card.authenticate(token);
+                const authenticationResponse = await transaction.authenticateCard(token);
+
                 if (authenticationResponse.status === "success") {
                     alertText("Payment completed!");
                 }
