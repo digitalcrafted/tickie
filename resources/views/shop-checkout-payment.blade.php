@@ -327,7 +327,8 @@
     <script>
      function payWithPaystack(){
         var handler = PaystackPop.setup({
-        key: 'pk_live_1d598815451629b710dd86c33e7355c3059e4867',
+        // key: 'pk_live_1d598815451629b710dd86c33e7355c3059e4867',
+        key: 'pk_test_9b8dfa786c7f4e80db93b6a0ddf06d3b371355e4',
         email: '{{$email}}',
         amount: ({{$total}} * 361) * 100,
         currency: "NGN",
@@ -342,10 +343,10 @@
             ]
         },
         callback: function(response){
-            alert('success. transaction ref is ' + response.reference);
+            console.log('success. transaction ref is ' + response.reference);
         },
         onClose: function(){
-            alert('window closed');
+            // alert('window closed');
         }
         });
         handler.openIframe();

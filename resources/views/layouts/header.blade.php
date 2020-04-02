@@ -109,7 +109,7 @@
         <nav class="navbar navbar-main navbar-expand-lg navbar-sticky navbar-transparent navbar-dark bg-dark"
             id="navbar-main">
             <div class="container">
-                <a class="navbar-brand mr-lg-5" href="index-2.html">
+                <a class="navbar-brand mr-lg-5" href="#">
                     <img alt="Image placeholder" src="{{ asset('img/brand/logo.png')}}" style="height: 50px;">
                 </a>
 
@@ -128,7 +128,7 @@
                                 aria-expanded="false">Products</a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-arrow py-0">
                                 <div class="list-group">
-                                    <a href="pages-landing.html" class="list-group-item list-group-item-action">
+                                    <a href="#" class="list-group-item list-group-item-action">
                                         <div class="media d-flex align-items-center">
                                             <img alt="Image placeholder"
                                                 src="{{ asset('img/brand/menu.1.jpg')}}" class="img-saturate"
@@ -139,7 +139,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="pages-secondary.html" class="list-group-item list-group-item-action">
+                                    <a href="#" class="list-group-item list-group-item-action">
                                         <div class="media d-flex align-items-center">
                                             <img alt="Image placeholder" src="{{ asset('img/brand/menu.2.jpg')}}"
                                                 class="img-saturate" style="width: 50px;">
@@ -149,7 +149,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="pages-account.html" class="list-group-item list-group-item-action">
+                                    <a href="#" class="list-group-item list-group-item-action">
                                         <div class="media d-flex align-items-center">
                                             <img alt="Image placeholder" src="{{ asset('img/brand/menu.3.jpg')}}"
                                                 class="img-saturate" style="width: 50px;">
@@ -159,7 +159,7 @@
                                             </div>
                                         </div>
                                     </a>
-                                    <a href="pages-shop.html" class="list-group-item list-group-item-action">
+                                    <a href="#" class="list-group-item list-group-item-action">
                                         <div class="media d-flex align-items-center">
                                             <img alt="Image placeholder" src="{{ asset('img/brand/menu.4.jpg')}}"
                                                 class="img-saturate" style="width: 50px;">
@@ -173,7 +173,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="about.html" role="button">About us</a>
+                            <a class="nav-link" href="#" role="button">About us</a>
                         </li>
                     </ul>
 
